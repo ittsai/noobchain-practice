@@ -23,7 +23,7 @@ public class Main {
         blockchain.add(new Block(blockchain.get(blockchain.size() - 1).hash));
         blockchain.get(1).mineBlock(difficulty);
         blockchain.add(new Block(blockchain.get(blockchain.size() - 1).hash));
-        blockchain.get(3).mineBlock(difficulty);
+        blockchain.get(2).mineBlock(difficulty);
 
         System.out.println("is valid: " + isChainValid());
 
