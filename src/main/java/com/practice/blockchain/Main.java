@@ -9,12 +9,15 @@ import java.util.ArrayList;
 public class Main {
 
     public static ArrayList<Block> blockchain = new ArrayList<>();
+    public static int difficulty = 5;
 
     public static void main(String[] args) {
         blockchain.add(new Block("First block", "0"));
+        blockchain.get(0).mineBlock(difficulty);
         blockchain.add(new Block("Second block", blockchain.get(blockchain.size() - 1).hash));
+        blockchain.get(1).mineBlock(difficulty);
         blockchain.add(new Block("Third block", blockchain.get(blockchain.size() - 1).hash));
-
+        blockchain.get(3).mineBlock(difficulty);
         String blockchainJson = new GsonBuilder().setPrettyPrinting().create().toJson(blockchain);
         System.out.println(blockchainJson);
     }
