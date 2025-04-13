@@ -18,13 +18,18 @@ public class Main {
         blockchain.get(1).mineBlock(difficulty);
         blockchain.add(new Block("Third block", blockchain.get(blockchain.size() - 1).hash));
         blockchain.get(3).mineBlock(difficulty);
+
+        System.out.println("is valid: " + isChainValid());
+
         String blockchainJson = new GsonBuilder().setPrettyPrinting().create().toJson(blockchain);
+
         System.out.println(blockchainJson);
     }
 
     public static Boolean isChainValid() {
         Block currentBlock;
         Block previousBlock;
+        String hashTarget = new String(new char[difficulty]).replace('\0', '0');
 
         for(int i = 0; i < blockchain.size(); i++) {
             currentBlock = blockchain.get(i);
@@ -35,6 +40,10 @@ public class Main {
             }
 
             if (!previousBlock.hash.equals(currentBlock.previousHash)) {
+                return false;
+            }
+
+            if (!currentBlock.hash.substring(0, difficulty).equals(hashTarget)) {
                 return false;
             }
         }
