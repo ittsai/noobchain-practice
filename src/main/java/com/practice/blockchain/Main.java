@@ -3,13 +3,19 @@ package com.practice.blockchain;
 import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
 
     public static ArrayList<Block> blockchain = new ArrayList<>();
+    public static HashMap<String, TransactionOutput> UTXOs = new HashMap<>();
     public static int difficulty = 5;
+    public static float minimumTransaction = 0.1f;
+    public static Wallet walletA;
+    public static Wallet walletB;
+    public static Transaction genesisTransaction;
 
     public static void main(String[] args) {
         blockchain.add(new Block("First block", "0"));
