@@ -18,11 +18,11 @@ public class Main {
     public static Transaction genesisTransaction;
 
     public static void main(String[] args) {
-        blockchain.add(new Block("First block", "0"));
+        blockchain.add(new Block("0"));
         blockchain.get(0).mineBlock(difficulty);
-        blockchain.add(new Block("Second block", blockchain.get(blockchain.size() - 1).hash));
+        blockchain.add(new Block(blockchain.get(blockchain.size() - 1).hash));
         blockchain.get(1).mineBlock(difficulty);
-        blockchain.add(new Block("Third block", blockchain.get(blockchain.size() - 1).hash));
+        blockchain.add(new Block(blockchain.get(blockchain.size() - 1).hash));
         blockchain.get(3).mineBlock(difficulty);
 
         System.out.println("is valid: " + isChainValid());
@@ -36,6 +36,8 @@ public class Main {
         Block currentBlock;
         Block previousBlock;
         String hashTarget = new String(new char[difficulty]).replace('\0', '0');
+        HashMap<String, TransactionOutput> tempUTXOs = new HashMap<>();
+        tempUTXOs.put(genesisTransaction.outputs.get(0).id, genesisTransaction.outputs.get(0));
 
         for(int i = 0; i < blockchain.size(); i++) {
             currentBlock = blockchain.get(i);
@@ -52,8 +54,52 @@ public class Main {
             if (!currentBlock.hash.substring(0, difficulty).equals(hashTarget)) {
                 return false;
             }
+
+            TransactionOutput tempOutput;
+            for (int t = 0; t < currentBlock.transactions.size(); t++) {
+                Transaction currentTransaction = currentBlock.transactions.get(i);
+
+                if (!currentTransaction.verifySignature()) {
+                    return false;
+                }
+
+                if (currentTransaction.getInputsValue() != currentTransaction.getOutputsValue()) {
+                    return false;
+                }
+
+                for (TransactionInput input : currentTransaction.inputs) {
+                    tempOutput = tempUTXOs.get(input.transactionOutputID);
+
+                    if (tempOutput == null) {
+                        return false;
+                    }
+
+                    if (input.UTXO.value != tempOutput.value) {
+                        return false;
+                    }
+
+                    tempUTXOs.remove(input.transactionOutputID);
+                }
+
+                for (TransactionOutput output : currentTransaction.outputs) {
+                    tempUTXOs.put(output.id, output);
+                }
+
+                if (currentTransaction.outputs.get(0).reciepient != currentTransaction.reciepient) {
+                    return false;
+                }
+
+                if (currentTransaction.outputs.get(1).reciepient != currentTransaction.sender) {
+                    return false;
+                }
+            }
         }
 
         return true;
+    }
+
+    public static void addBlock(Block newBlock) {
+        newBlock.mineBlock(difficulty);
+        blockchain.add(newBlock);
     }
 }

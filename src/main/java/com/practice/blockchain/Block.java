@@ -10,7 +10,7 @@ public class Block {
     public String hash;
     public String previousHash;
     public String merkleRoot;
-    private ArrayList<Transaction> transactions = new ArrayList<>();
+    public ArrayList<Transaction> transactions = new ArrayList<>();
     private long timeStamp;
     private int nonce;
 
