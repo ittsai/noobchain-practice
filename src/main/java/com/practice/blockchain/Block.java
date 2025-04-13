@@ -1,4 +1,4 @@
-package com.practice.game;
+package com.practice.blockchain;
 
 import java.util.Date;
 
