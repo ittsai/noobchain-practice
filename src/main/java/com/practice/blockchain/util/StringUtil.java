@@ -88,4 +88,8 @@ public class StringUtil {
     public static String getStringFromKey(PublicKey key) {
         return Base64.getEncoder().encodeToString(key.getEncoded());
     }
+
+    public static String getDifficultyString(int difficulty) {
+        return "0".repeat(difficulty);
+    }
 }
