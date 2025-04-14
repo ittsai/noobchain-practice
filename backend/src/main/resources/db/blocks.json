@@ -1,0 +1,62 @@
+[
+  {
+    "create": "blocks",
+    "validator": {
+      "$jsonSchema": {
+        "bsonType": "object",
+        "required": [
+          "hash",
+          "previousHash",
+          "merkleRoot",
+          "transactions",
+          "timestamp",
+          "nonce"
+        ],
+        "properties": {
+          "hash": {
+            "bsonType": "string"
+          },
+          "previousHash": {
+            "bsonType": "string"
+          },
+          "merkleRoot": {
+            "bsonType": "string"
+          },
+          "timestamp": {
+            "bsonType": "date"
+          },
+          "nonce": {
+            "bsonType": "int"
+          }
+        }
+      }
+    }
+  },
+  {
+    "createIndexes": "blocks",
+    "indexes": [
+      {
+        "key": {
+          "hash": 1
+        },
+        "unique": true,
+        "name": "hash_index"
+      },
+      {
+        "key": {
+          "previousHash": 1
+        },
+        "unique": false,
+        "name": "previousHash_index"
+      },
+      {
+        "key": {
+          "merkleRoot": 1
+        },
+        "unique": false,
+        "name": "merkleRoot_index"
+      }
+    ]
+  }
+]
+
