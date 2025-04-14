@@ -1,12 +1,12 @@
 package com.practice.blockchain;
 
-import com.google.gson.GsonBuilder;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+@SpringBootApplication
 public class Main {
 
     public static ArrayList<Block> blockchain = new ArrayList<>();
@@ -18,6 +18,7 @@ public class Main {
     public static Transaction genesisTransaction;
 
     public static void main(String[] args) {
+
         blockchain.add(new Block("0"));
         blockchain.get(0).mineBlock(difficulty);
         blockchain.add(new Block(blockchain.get(blockchain.size() - 1).hash));
@@ -25,11 +26,13 @@ public class Main {
         blockchain.add(new Block(blockchain.get(blockchain.size() - 1).hash));
         blockchain.get(2).mineBlock(difficulty);
 
-        System.out.println("is valid: " + isChainValid());
+        //System.out.println("is valid: " + isChainValid());
 
-        String blockchainJson = new GsonBuilder().setPrettyPrinting().create().toJson(blockchain);
+        //String blockchainJson = new GsonBuilder().setPrettyPrinting().create().toJson(blockchain);
 
-        System.out.println(blockchainJson);
+        //System.out.println(blockchainJson);
+
+        SpringApplication.run(Main.class, args);
     }
 
     public static Boolean isChainValid() {
