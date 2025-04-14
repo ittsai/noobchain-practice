@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "api/transaction", produces = MediaType.APPLICATION_JSON_VALUE)
-public class TransactionController {
+public class BlockController {
 
     @PostMapping("create")
     public void createBlock() {}
