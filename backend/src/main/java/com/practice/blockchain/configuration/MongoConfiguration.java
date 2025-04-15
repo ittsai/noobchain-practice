@@ -29,7 +29,7 @@ public class MongoConfiguration implements InitializingBean {
     }
 
     private void initDatabase() throws IOException {
-        if (!mongoTemplate.collectionExists("block")) {
+        if (!mongoTemplate.collectionExists("blocks")) {
             logger.info("create blocks collection");
             String jsonContent = new ClassPathResource("db/blocks.json").getContentAsString(StandardCharsets.UTF_8);
             ObjectMapper objectMapper = new ObjectMapper();
