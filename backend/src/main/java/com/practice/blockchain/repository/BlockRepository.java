@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 public class BlockRepository {
     public final MongoTemplate mongoTemplate;
     public final String BLOCKS_COLLECTION = "blocks";
-    
+
     public BlockRepository(MongoTemplate mongoTemplate) {
         this.mongoTemplate = mongoTemplate;
     }

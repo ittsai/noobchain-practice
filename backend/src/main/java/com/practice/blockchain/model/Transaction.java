@@ -1,14 +1,15 @@
 package com.practice.blockchain.model;
 
-import org.springframework.data.annotation.Id;
-
-import java.security.PublicKey;
+import org.bson.types.ObjectId;
+import java.time.Instant;
 
 public record Transaction(
-        @Id
-        String transactionId,
-        PublicKey sender,
-        PublicKey recipient,
-        float value,
-        byte[] signature
+        ObjectId _id,
+        String renterId,
+        String assetId,
+        RentalPeriod rentalPeriod,
+        String signature,
+        Instant timestamp,
+        Status status
 ) {}
+
