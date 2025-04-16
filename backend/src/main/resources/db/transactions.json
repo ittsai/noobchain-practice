@@ -1,0 +1,73 @@
+[
+  {
+    "create": "transactions",
+    "validator": {
+      "$jsonSchema": {
+        "bsonType": "object",
+        "required": [
+          "renterId",
+          "assetId",
+          "rentalPeriod",
+          "signature",
+          "timestamp",
+          "status"
+        ],
+        "properties": {
+          "renterId": {
+            "bsonType": "string"
+          },
+          "assetId": {
+            "bsonType": "string"
+          },
+          "signature": {
+            "bsonType": "string"
+          },
+          "rentalPeriod": {
+            "bsonType": "object"
+          },
+          "timestamp": {
+            "bsonType": "date"
+          },
+          "status": {
+            "bsonType": "string",
+            "enum": ["PENDING", "CONFIRMED", "REJECTED", "CANCELLED", "EXPIRED"]
+          }
+        }
+      }
+    }
+  },
+  {
+    "createIndexes": "transactions",
+    "indexes": [
+      {
+        "key": {
+          "renterId": 1
+        },
+        "unique": false,
+        "name": "renterId_index"
+      },
+      {
+        "key": {
+          "assetId": 1
+        },
+        "unique": false,
+        "name": "assetId_index"
+      },
+      {
+        "key": {
+          "signature": 1
+        },
+        "unique": false,
+        "name": "signature_index"
+      },
+      {
+        "key": {
+          "status": 1
+        },
+        "unique": false,
+        "name": "status_index"
+      }
+    ]
+  }
+]
+

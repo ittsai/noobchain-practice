@@ -22,6 +22,9 @@
           "merkleRoot": {
             "bsonType": "string"
           },
+          "transactions": {
+            "bsonType": "object"
+          },
           "timestamp": {
             "bsonType": "date"
           },
