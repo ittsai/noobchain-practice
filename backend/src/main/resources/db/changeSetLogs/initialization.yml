@@ -1,0 +1,42 @@
+ExecutionOrder: 1
+ChangeSets:
+  - ChangeSet:
+      changeSetId: "create-assets-collection"
+      changeSetName: "create-assets-collection"
+      author: "admin"
+      category: "SCHEMA"
+      description: "create assets collection"
+      fileName: "assets"
+      fileType: "JSON"
+  - ChangeSet:
+      changeSetId: "create-users-collection"
+      changeSetName: "create-users-collection"
+      author: "admin"
+      category: "SCHEMA"
+      description: "create users collection"
+      fileName: "users"
+      fileType: "JSON"
+  - ChangeSet:
+      changeSetId: "create-transactions-collection"
+      changeSetName: "create-transactions-collection"
+      author: "admin"
+      category: "SCHEMA"
+      description: "create transactions collection"
+      fileName: "transactions"
+      fileType: "JSON"
+  - ChangeSet:
+      changeSetId: "create-blocks-collection"
+      changeSetName: "create-blocks-collection"
+      author: "admin"
+      category: "SCHEMA"
+      description: "create blocks collection"
+      fileName: "blocks"
+      fileType: "JSON"
+  - ChangeSet:
+      changeSetId: "create-tokens-collection"
+      changeSetName: "create-tokens-collection"
+      author: "admin"
+      category: "SCHEMA"
+      description: "create tokens collection"
+      fileName: "tokens"
+      fileType: "JSON"
