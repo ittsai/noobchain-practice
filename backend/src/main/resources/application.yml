@@ -3,3 +3,9 @@ spring:
     mongodb:
       uri: mongodb://localhost:27017
       database: blockchain
+
+migration:
+  scripts:
+    base-source-folder: src/main/java
+    class-folder-path: com/practice/blockchain/scripts
+  enabled: true
