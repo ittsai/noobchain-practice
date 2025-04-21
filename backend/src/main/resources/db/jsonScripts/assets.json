@@ -1,0 +1,43 @@
+[
+  {
+    "create": "assets",
+    "validator": {
+      "$jsonSchema": {
+        "bsonType": "object",
+        "required": [
+          "name",
+          "location",
+          "available",
+          "ownerId"
+        ],
+        "properties": {
+          "name": {
+            "bsonType": "string"
+          },
+          "location": {
+            "bsonType": "string"
+          },
+          "available": {
+            "bsonType": "string"
+          },
+          "ownerId": {
+            "bsonType": "string"
+          }
+        }
+      }
+    }
+  },
+  {
+    "createIndexes": "assets",
+    "indexes": [
+      {
+        "key": {
+          "ownerId": 1
+        },
+        "unique": false,
+        "name": "ownerId_index"
+
+      }
+    ]
+  }
+]

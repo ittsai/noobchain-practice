@@ -1,0 +1,62 @@
+[
+  {
+    "create": "users",
+    "validator": {
+      "$jsonSchema": {
+        "bsonType": "object",
+        "required": [
+          "walletAddress",
+          "email",
+          "name",
+          "publicKey",
+          "role",
+          "createdAt",
+          "lastLoginAt"
+        ],
+        "properties": {
+          "walletAddress": {
+            "bsonType": "string"
+          },
+          "email": {
+            "bsonType": "string"
+          },
+          "name": {
+            "bsonType": "string"
+          },
+          "publicKey": {
+            "bsonType": "string"
+          },
+          "role": {
+            "bsonType": "string",
+            "enum": ["RENTER", "OWNER", "ADMIN"]
+          },
+          "createdAt": {
+            "bsonType": "date"
+          },
+          "lastLoginAt": {
+            "bsonType": "date"
+          }
+        }
+      }
+    }
+  },
+  {
+    "createIndexes": "users",
+    "indexes": [
+      {
+        "key": {
+          "email": 1
+        },
+        "unique": true,
+        "name": "email_index"
+      },
+      {
+        "key": {
+          "publicKey": 1
+        },
+        "unique": true,
+        "name": "publicKey_index"
+      }
+    ]
+  }
+]
