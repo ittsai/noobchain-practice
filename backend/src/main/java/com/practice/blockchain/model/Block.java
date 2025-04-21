@@ -9,6 +9,7 @@ import java.util.List;
 @Document(collation = "blocks")
 public record Block(
     @Id
+    String id,
     String hash,
     String previoushash,
     String merkleRoot,

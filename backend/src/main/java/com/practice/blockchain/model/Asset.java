@@ -1,7 +1,10 @@
 package com.practice.blockchain.model;
 
+import org.springframework.data.annotation.Id;
+
 public record Asset(
-        String _id,
+        @Id
+        String id,
         String name,
         String location,
         String available,

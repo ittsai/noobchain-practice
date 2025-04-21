@@ -1,11 +1,19 @@
 package com.practice.blockchain.model;
 
+import org.springframework.data.annotation.Id;
+
 import java.security.PublicKey;
+import java.time.Instant;
+import java.util.List;
 
 public record User(
-        String _id,
-        String name,
+        @Id
+        String id,
+        String walletAddress,
         String email,
+        String name,
         PublicKey publicKey,
-        USerRole role
+        UserRole role,
+        Instant createdAt,
+        Instant lastLoginAt
 ) {}

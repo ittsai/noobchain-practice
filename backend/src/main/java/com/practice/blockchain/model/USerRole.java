@@ -1,6 +1,6 @@
 package com.practice.blockchain.model;
 
-public enum USerRole {
+public enum UserRole {
     RENTER,
     OWNER,
     ADMIN
