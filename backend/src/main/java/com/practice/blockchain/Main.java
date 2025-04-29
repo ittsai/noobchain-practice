@@ -1,12 +1,28 @@
 package com.practice.blockchain;
 
+import it.migration.configuration.DMConfiguration;
+import okhttp3.OkHttpClient;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Import;
+import org.web3j.crypto.ECKeyPair;
+import org.web3j.crypto.Keys;
+import org.web3j.protocol.Web3j;
+import org.web3j.protocol.core.DefaultBlockParameterName;
+import org.web3j.protocol.core.methods.response.EthGetBalance;
+import org.web3j.protocol.http.HttpService;
 
+import java.io.IOException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 @SpringBootApplication
+@Import(DMConfiguration.class)
 public class Main {
 
     public static ArrayList<Block> blockchain = new ArrayList<>();
@@ -17,22 +33,28 @@ public class Main {
     public static Wallet walletB;
     public static Transaction genesisTransaction;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, InvalidAlgorithmParameterException, NoSuchAlgorithmException, NoSuchProviderException {
+        ApplicationContext context = SpringApplication.run(Main.class, args);
 
-        blockchain.add(new Block("0"));
-        blockchain.get(0).mineBlock(difficulty);
-        blockchain.add(new Block(blockchain.get(blockchain.size() - 1).hash));
-        blockchain.get(1).mineBlock(difficulty);
-        blockchain.add(new Block(blockchain.get(blockchain.size() - 1).hash));
-        blockchain.get(2).mineBlock(difficulty);
+        // public RPC
+        // https://rpc.sepolia.org
+        // https://ethereum-goerli.publicnode.com
 
-        //System.out.println("is valid: " + isChainValid());
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(30, TimeUnit.SECONDS)
+                .build();
+        Web3j web3j = Web3j.build(new HttpService("https://ethereum-sepolia.publicnode.com", okHttpClient));
 
-        //String blockchainJson = new GsonBuilder().setPrettyPrinting().create().toJson(blockchain);
+        ECKeyPair keyPair = Keys.createEcKeyPair();
+        String address = "0x" + Keys.getAddress(keyPair);
 
-        //System.out.println(blockchainJson);
+        EthGetBalance balance = web3j.ethGetBalance(
+                address,
+                DefaultBlockParameterName.LATEST).send();
 
-        SpringApplication.run(Main.class, args);
+        System.out.println("Balance: " + balance.getBalance());
     }
 
     public static Boolean isChainValid() {
